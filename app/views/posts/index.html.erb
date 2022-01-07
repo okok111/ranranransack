@@ -1,0 +1,55 @@
+<h1>posts#index</h1>
+
+<%= search_form_for @q  do |f| %>
+    <p><%= f.label :値段 %>
+    <%= f.select :uno_cont, [['~1000円', '~1000円、'], ['1000~2000円', '1000~2000円、'], ['2000円~', '2000円~、']], {include_blank: '値段'} %>
+    <%= f.label :評価 %>
+    <%= f.select :dos_cont, [['最高', '最高、'], ['普通', '普通、'], ['アカーン', 'アカーン、']] , {include_blank: '評価'} %>
+    <%= f.label :拠点 %>
+    <%= f.select :tres_cont, [['京都', '京都'], ['大阪', '大阪'], ['神戸', '神戸']] , {include_blank: '拠点'} %>
+    <%= f.submit "search" %></p>
+<% end %>
+
+
+
+<% if user_signed_in? %>    
+<%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>
+<% end %>
+<%= link_to "新規投稿へ", new_post_path %>
+<div class="posts-container">
+    <% @posts.each do |t| %>
+        <div class="post">
+            <% if t.title.blank? %>
+                <p>タイトルありまへん</p>
+            <% else %>
+                <p><%= t.title %></p>
+            <% end %>
+                <p>
+                    <% if t.image.present? %>
+                        <%= image_tag t.image_url, size: '250x200'%>
+                    <% else %>
+                        <%= image_tag "noimage.png", size: '250x200' %>
+                    <% end %>
+                </p>
+            <p><%= t.contents %></p>
+            <p>
+                <%= t.uno %>
+                <%= t.dos %>
+                <%= t.tres %>
+            </p>
+            <div class="post_option"> 
+                <% if user_signed_in? && current_user.id == t.user_id %>
+                    <%= link_to edit_post_path(t.id) , method: :get do %>
+                        <i class="far fa-edit"></i>
+                    <% end %>
+                    <%= link_to post_path(t.id), method: :delete do %>
+                        <i class="fas fa-trash-alt"></i>
+                    <% end %>
+                <% end %>
+                    <%= link_to post_path(t.id), method: :get do %>
+                        <i class="fas fa-arrow-circle-right"></i>
+                    <% end %>
+            </div>
+        </div>
+    <% end %>
+</div>

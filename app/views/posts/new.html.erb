@@ -1,0 +1,20 @@
+<h1>posts#new</h1>
+<div class="newall">
+    <%= form_for @post do |f| %>
+        <div class="post-new">
+            <p><%= f.label :title %></p>
+            <p><%= f.text_field :title, :size => 50 %></p>
+            <p><%= f.label :image %></p>
+            <p><%= f.file_field :image %></p>
+            <p><%= f.select :uno, [['値段', ''], ['~1000円', '~1000円、'], ['1000~2000円', '1000~2000円、'], ['2000円~', '2000円~、']] %></p>
+            <p><%= f.select :dos, [['評価', ''], ['最高', '最高、'], ['普通', '普通、'], ['アカーン', 'アカーン、']] %></p>
+            <p><%= f.select :tres, [['拠点', ''], ['京都', '京都'], ['大阪', '大阪'], ['神戸', '神戸']] %></p>
+            <p><%= f.label :contents %></p>
+            <p><%= f.text_field :contents, :size => 50 %></p>
+        </div>
+        <%= f.submit "postする" %>
+    <% end %>
+</div>
+<%= link_to "post一覧に戻る", posts_path %>
+
+

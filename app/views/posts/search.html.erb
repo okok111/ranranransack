@@ -1,0 +1,39 @@
+<h1>検索結果だお</h1>
+
+<% @results.each do |t| %>
+        <div class="search">
+            <% if t.title.blank? %>
+                <p>タイトルありまへん</p>
+            <% else %>
+                <p><%= t.title %></p>
+            <% end %>
+                <p>
+                    <% if t.image.present? %>
+                        <%= image_tag t.image_url, size: '250x200'%>
+                    <% else %>
+                        <%= image_tag "noimage.png", size: '250x200' %>
+                    <% end %>
+                </p>
+            <p><%= t.contents %></p>
+            <p>
+                <%= t.uno %>
+                <%= t.dos %>
+                <%= t.tres %>
+            </p>
+            <div class="post_option"> 
+                <% if user_signed_in? && current_user.id == t.user_id %>
+                    <%= link_to edit_post_path(t.id) , method: :get do %>
+                        <i class="far fa-edit"></i>
+                    <% end %>
+                    <%= link_to post_path(t.id), method: :delete do %>
+                        <i class="fas fa-trash-alt"></i>
+                    <% end %>
+                <% end %>
+                <%= link_to post_path(t.id), method: :get do %>
+                    <i class="fas fa-arrow-circle-right"></i>
+                <% end %>
+            </div>
+        </div>
+    <% end %>
+
+    <%= link_to 'Top', posts_path %>
