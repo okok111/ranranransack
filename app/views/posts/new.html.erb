@@ -6,7 +6,21 @@
             <p><%= f.text_field :title, :size => 50 %></p>
             <p><%= f.label :image %></p>
             <p><%= f.file_field :image %></p>
-            <p><%= f.select :uno, [['値段', ''], ['~1000円', '~1000円、'], ['1000~2000円', '1000~2000円、'], ['2000円~', '2000円~、']] %></p>
+            <p><%= f.datetime_field :datedate , {discard: true} %></p>
+            <!--
+            <div class="check_box">
+                <span>タグ</span>
+                <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+                    <div>
+                    <%= tag.label do %>
+                        <%= tag.check_box %>
+                        <%= tag.text %>
+                    <% end %>
+                    </div>
+                <% end %>
+            </div>
+            -->
+            <p><%= f.select :uno, [['値段', ''], ['~1000円', 'aiu'], ['1000~2000円', 'eo'], ['2000円~', 'ka']] %></p>
             <p><%= f.select :dos, [['評価', ''], ['最高', '最高、'], ['普通', '普通、'], ['アカーン', 'アカーン、']] %></p>
             <p><%= f.select :tres, [['拠点', ''], ['京都', '京都'], ['大阪', '大阪'], ['神戸', '神戸']] %></p>
             <p><%= f.label :contents %></p>

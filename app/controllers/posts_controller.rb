@@ -3,9 +3,13 @@ class PostsController < ApplicationController
     before_action :authenticate_user! , except: [:show, :index]
     
     def index
-        @posts = Post.all
+        @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
+
         @q = Post.ransack(params[:q])
-        @posts = @q.result(distinct: true)
+        @posts= @q.result
+        @post = Post.new
+
+        
     end
 
     def new
@@ -51,7 +55,7 @@ class PostsController < ApplicationController
     private
 
     def post_params
-        params.require(:post).permit(:title, :contents ,:image , :uno , :dos ,:tres)
+        params.require(:post).permit(:title, :datedate, :contents ,:image , :uno , :dos ,:tres, tag_ids: [])
     end
 end
 
