@@ -3,7 +3,7 @@ class PostsController < ApplicationController
     before_action :authenticate_user! , except: [:show, :index]
     
     def index
-        @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
+        @posts =  Post.all
 
         @q = Post.ransack(params[:q])
         @posts= @q.result

@@ -1,21 +1,5 @@
 <h1>posts#index</h1>
-    <%= form_for @post do |f| %>
-            <p><%= f.select :uno, [['値段', ''], ['~1000円', 'aiu'], ['1000~2000円', 'eo'], ['2000円~', 'ka']] %></p>
-            <p><%= f.select :dos, [['評価', ''], ['最高', '最高、'], ['普通', '普通、'], ['アカーン', 'アカーン、']] %></p>
-            <p><%= f.select :tres, [['拠点', ''], ['京都', '京都'], ['大阪', '大阪'], ['神戸', '神戸']] %></p>
-            <%= f.submit "postする" %>
-    <% end %>
-<!--
-<%= form_tag posts_path, method: :get, class: 'boards__searchForm' do %>
-        <%= select_tag :tag_id,
-                        options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]),
-                        {
-                        prompt: 'タグで絞り込み検索',
-                        onchange: 'submit(this.form);'
-                        }
-      %>
-    <% end %>
--->    
+
 <%= search_form_for @q  do |f| %>
     <p><%= f.label :値段 %>
     <%= f.select :uno_cont, [['~1000円', '~1000円、'], ['1000~2000円', '1000~2000円、'], ['2000円~', '2000円~、']], {include_blank: '値段'} %>
@@ -41,9 +25,7 @@
                 <% else %>
                     <p><%= t.title %></p>
                 <% end %>
-                <% t.tags.each do |tag| %>
-                    <%= tag.name %>
-                <% end %>
+                
                 <p><%= t.datedate.to_s(:datetime_jp) %></p>
                 <!--
                     <p>
@@ -58,6 +40,7 @@
 
 
                 <p>
+                    <%= t.uno %>
                     <%= t.dos %>
                     <%= t.tres %>
                 </p>
